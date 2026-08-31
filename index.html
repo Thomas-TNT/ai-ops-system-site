@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Ops System</title>
+<meta name="description" content="Eight conventions that keep an AI-built system working after the novelty wears off. Written by someone who is not an engineer and built them anyway.">
+<style>
+  :root{--bg:#fcfbf9;--surface:#fff;--border:#e5e0d8;--text:#1c1a17;--muted:#69625a;--accent:#a8482a;--accent-soft:#fdf0ea;--ok:#2d6b4c;--r:10px}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151410;--surface:#1d1c17;--border:#33302a;--text:#f1ede6;--muted:#a49c8e;--accent:#e08050;--accent-soft:#291f18;--ok:#6fbb92}}
+  :root[data-theme="dark"]{--bg:#151410;--surface:#1d1c17;--border:#33302a;--text:#f1ede6;--muted:#a49c8e;--accent:#e08050;--accent-soft:#291f18;--ok:#6fbb92}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 ui-sans-serif,-apple-system,"Segoe UI",Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px}
+  section{padding:50px 0;border-bottom:1px solid var(--border)}
+  section:last-of-type{border-bottom:0}
+  h1{font-size:clamp(1.9rem,5.5vw,2.7rem);line-height:1.14;letter-spacing:-.022em;margin:0 0 18px}
+  h2{font-size:1.35rem;letter-spacing:-.01em;margin:0 0 20px}
+  h3{font-size:1rem;margin:0 0 6px}
+  p{margin:0 0 16px}
+  .lede{font-size:1.1rem;color:var(--muted)}
+  .muted{color:var(--muted)}
+  header{padding:58px 0 6px}
+  .eyebrow{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:5px 11px;border-radius:100px;margin-bottom:22px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:1.02rem;padding:14px 28px;border-radius:var(--r);border:0;cursor:pointer}
+  .btn:hover{filter:brightness(1.07)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:26px 0 8px}
+  .bio{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+  .bio p{margin:0;font-size:.95rem;color:var(--muted)}
+  .bio strong{color:var(--text)}
+  .mods{display:grid;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+  .mod{background:var(--surface);padding:16px 20px;display:grid;grid-template-columns:30px 1fr;gap:14px}
+  .num{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+  .mod p{margin:0;color:var(--muted);font-size:.93rem}
+  .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r);padding:20px 22px;margin:26px 0}
+  .callout p:last-child{margin-bottom:0}
+  .fit{display:grid;gap:26px;grid-template-columns:1fr 1fr}
+  @media(max-width:620px){.fit{grid-template-columns:1fr}}
+  .fit ul{margin:0;padding-left:20px;color:var(--muted)}
+  .fit li{margin-bottom:9px}
+  .fit h3{color:var(--text)}
+  .price-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:30px;text-align:center}
+  .price{font-size:2.5rem;font-weight:700;letter-spacing:-.02em}
+  .badge{color:var(--ok);font-weight:600;font-size:.9rem}
+  form{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  input[type=email]{flex:1 1 240px;padding:13px 15px;font-size:1rem;font-family:inherit;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);color:var(--text)}
+  input[type=email]:focus{outline:2px solid var(--accent);outline-offset:1px}
+  details{border-top:1px solid var(--border);padding:15px 0}
+  details:last-of-type{border-bottom:1px solid var(--border)}
+  summary{cursor:pointer;font-weight:600}
+  details p{margin:12px 0 0;color:var(--muted)}
+  footer{padding:32px 0 58px;color:var(--muted);font-size:.88rem}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">For people who aren't engineers</span>
+  <h1>You built something with AI. Now you're not sure you can trust it.</h1>
+  <p class="lede">
+    It worked when you made it. Then you came back six weeks later and couldn't remember
+    how to run it. Or a number came out wrong and you had no way to tell which step broke.
+    Or you edited the spreadsheet and the script wiped your changes.
+  </p>
+  <p class="lede">
+    None of those are AI problems. A better prompt fixes none of them. They're structural,
+    and there are eight conventions that prevent them.
+  </p>
+</header>
+
+<section>
+  <div class="bio">
+    <div>
+      <p><strong>Who's writing this.</strong> I'm not a software engineer &mdash;
+      I run IT operations. Over the last two years I've built and now depend on a dozen systems
+      made with AI: reporting pipelines, trackers, dashboards, scheduled jobs that run without me.</p>
+      <p style="margin-top:12px">Every convention here exists because something broke and I had to
+      work out why.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>The eight conventions</h2>
+  <div class="mods">
+    <div class="mod"><span class="num">01</span><div><h3>Project shape</h3>
+      <p>Stops you coming back in six weeks unable to run your own tool.</p></div></div>
+    <div class="mod"><span class="num">02</span><div><h3>One source of truth</h3>
+      <p>Stops two files disagreeing while both look correct. The most common silent failure there is.</p></div></div>
+    <div class="mod"><span class="num">03</span><div><h3>Re-runnable builds</h3>
+      <p>Stops your spreadsheet, document, and chart drifting apart after one manual edit.</p></div></div>
+    <div class="mod"><span class="num">04</span><div><h3>Safe writes</h3>
+      <p>Stops you destroying data you can't get back. The only failure here that isn't recoverable.</p></div></div>
+    <div class="mod"><span class="num">05</span><div><h3>Runbooks</h3>
+      <p>Stops you needing the AI to operate the thing the AI built.</p></div></div>
+    <div class="mod"><span class="num">06</span><div><h3>Scheduling</h3>
+      <p>Stops silent failure you discover eleven days late from someone else.</p></div></div>
+    <div class="mod"><span class="num">07</span><div><h3>Working with the agent</h3>
+      <p>Stops you re-explaining how you work at the start of every single session.</p></div></div>
+    <div class="mod"><span class="num">08</span><div><h3>Where it rots</h3>
+      <p>Eight ways a working system produces wrong output that looks completely normal.</p></div></div>
+  </div>
+
+  <div class="callout">
+    <p><strong>Module 08 is why this costs $99 and not $19.</strong> Everything before it is
+    structure a careful person could reach alone. Module 08 is the part you can't guess.</p>
+    <p>If an automated import counts as a person's activity, your per-person numbers are wrong
+    and the report looks completely normal. If a category rule has silently defaulted everything
+    to "Other" since day one, you have a default value with an elaborate preamble. These don't
+    throw errors. That's exactly why they survive to month three.</p>
+  </div>
+
+  <p class="muted"><small>Plus 10 copy-paste templates: a project wrapper script, backup and
+  sync scripts, and fill-in runbook, setup, and preferences files.</small></p>
+</section>
+
+<section>
+  <h2>Is this for you?</h2>
+  <div class="fit">
+    <div><h3>Yes, if</h3><ul>
+      <li>You've built something real with AI and now rely on it</li>
+      <li>You're comfortable in a terminal but wouldn't call yourself a developer</li>
+      <li>You've had at least one "why is this number wrong?" moment</li>
+      <li>Nobody at your job is going to build this for you</li>
+    </ul></div>
+    <div><h3>No, if</h3><ul>
+      <li>You're a working software engineer &mdash; you know all of this already</li>
+      <li>You want to learn prompting. That isn't the bottleneck and isn't covered here.</li>
+      <li>You've never built anything with AI yet &mdash; come back when you have</li>
+      <li>You need production-grade practice for a team. This is the tier below that.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="price-card">
+    <p class="badge">Instant download</p>
+    <div class="price">$99</div>
+    <p class="muted"><small>9 documents, 10 templates. Free updates. 30-day refund, no questions.</small></p>
+  </div>
+</section>
+
+<section>
+  <h2>Questions</h2>
+  <details><summary>Do I need to know how to code?</summary>
+    <p>No, but you need to be willing to run a command in a terminal and read a script without
+    panicking. If you've had AI write you something and then run it, you're the right reader.</p></details>
+  <details><summary>Which AI tool is this for?</summary>
+    <p>All of them. These are conventions for the code and files the AI produces, not for the AI
+    itself. I use Claude; nothing here depends on that.</p></details>
+  <details><summary>Is this just folder organization?</summary>
+    <p>Partly, and I'd rather say so than oversell. Modules 01 through 03 are structure. Modules
+    04 and 08 are the ones that stop you losing data and catch numbers that are quietly wrong &mdash;
+    those are the ones people email me about.</p></details>
+  <details><summary>Will this make me a developer?</summary>
+    <p>No. It makes you a competent operator of things a developer would look at and find
+    reasonable. Different skill, genuinely useful, much faster to acquire.</p></details>
+  <details><summary>What if it's not useful?</summary>
+    <p>Email me within 30 days and I'll refund it. You keep the files &mdash; chasing them isn't
+    worth either of our time.</p></details>
+</section>
+
+<footer>
+  <p>Not affiliated with or endorsed by Anthropic, OpenAI, or any AI vendor.</p>
+</footer>
+
+</div>
+</body>
+</html>
